@@ -1,30 +1,10 @@
-<div class="team-stats">
-  <p [ngClass]="getSalaryStatus()">
-    Total Salary: ${{ totalSalary | shortMoney }} / ${{ salaryCap | shortMoney }}
-  </p>
-  <p>Average Overall: {{ averageOverall | number:'1.0-0' }}</p>
-</div>
-
 <div class="team-container">
   <div class="forwards-section section-background">
-    <app-team-section
-      [players]="forwards"
-      [cols]="3"
-      [listName]=PlayerList.Forwards>
-    </app-team-section>
+    <app-team-section [cols]="3" [listName]=PlayerList.Forwards></app-team-section>
   </div>
 
   <div class="defense-goalies-section section-background">
-    <app-team-section
-      [players]="defense"
-      [cols]="2"
-      [listName]=PlayerList.Defense>
-    </app-team-section>
-
-    <app-team-section
-      [players]="goalies"
-      [cols]="2"
-      [listName]="PlayerList.Goalies">
-    </app-team-section>
+    <app-team-section [cols]="2" [listName]=PlayerList.Defense></app-team-section>
+    <app-team-section [cols]="2" [listName]=PlayerList.Goalies></app-team-section>
   </div>
 </div>

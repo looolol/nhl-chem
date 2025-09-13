@@ -7,7 +7,7 @@
   (cdkDropListDropped)="onDrop($event, listName)"
 >
   <mat-grid-tile
-    *ngFor="let player of players; let i = index"
+    *ngFor="let player of players$ | async; let i = index"
     cdkDrag
     [cdkDragDisabled]="!player"
     (cdkDragStarted)="cdkDragStarted(listName, i)"
@@ -19,6 +19,10 @@
       <app-player [player]="player"></app-player>
     </ng-template>
     <ng-template cdkDragPlaceholder></ng-template>
-    <app-player [player]="player"></app-player>
+
+    <app-player
+      [player]="player"
+      (contextmenu)="onRightClick(i, $event)"
+    ></app-player>
   </mat-grid-tile>
 </mat-grid-list>

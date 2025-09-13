@@ -5,8 +5,16 @@
     <h1>Team Overview</h1>
   </div>
 
+  <!-- Team Stats -->
+  <div class="team-stats">
+    <p [ngClass]="teamService.salaryStatus$ | async">
+      Total Salary: ${{ teamService.totalSalary$ | async | shortMoney }} / ${{ teamService.salaryCap | shortMoney}}
+    </p>
+    <p>Average Overall: {{ teamService.averageOverall$ | async | number:'1.0-0' }}</p>
+  </div>
+
   <!-- Team Lineup -->
-  <div class="team-lineup">
+  <div class="team-lineup" *ngIf="!(teamService.loading$ | async)">
     <app-team></app-team>
   </div>
 

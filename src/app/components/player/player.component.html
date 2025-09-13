@@ -1,9 +1,16 @@
-<mat-card class="player-card" [class.empty-slot]="!player">
-  <mat-card-header>
-    <mat-card-title>{{ player?.name || 'Empty Slot' }}</mat-card-title>
-    <mat-card-subtitle>{{ player ? (player.team + ' - ' + player.country) : '' }}</mat-card-subtitle>
+<mat-card
+  class="player-card"
+  [class.empty-slot]="player.name === DEFAULT_PLAYER.name"
+  (click)="onCardClick()"
+>
+
+  <mat-card-header *ngIf="player.name !== DEFAULT_PLAYER.name; else emptyContent">
+    <mat-card-title>{{ player.name}}</mat-card-title>
+    <mat-card-subtitle>{{ player.team + ' - ' + player.country }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content *ngIf="player; else emptyContent">
+
+<!--  <mat-card-content *ngIf="player.name !== DEFAULT_PLAYER.name; else emptyContent">-->
+  <mat-card-content>
     <p>Handedness: {{ player.handedness }}</p>
     <p>Overall: {{ player.overall }}</p>
     <p>Salary: ${{ player.salary | shortMoney }}</p>
@@ -11,7 +18,8 @@
 </mat-card>
 
 <ng-template #emptyContent>
-  <mat-card-content class="empty-content">
-    <p>Empty Slot</p>
-  </mat-card-content>
+  <mat-card-header >
+    <mat-card-title>Empty Slot</mat-card-title>
+    <mat-card-subtitle>Click to Add</mat-card-subtitle>
+  </mat-card-header>
 </ng-template>

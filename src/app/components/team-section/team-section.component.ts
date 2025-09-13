@@ -1,10 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CdkDragDrop, DragDropModule} from '@angular/cdk/drag-drop';
 import {Player} from '../../models/players';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {PlayerComponent} from '../player/player.component';
 import {CommonModule} from '@angular/common';
 import {PlayerList} from '../../models/player-list';
+import {TeamService} from '../../services/team.service';
+import {Observable, of} from 'rxjs';
 
 
 @Component({
@@ -18,15 +20,25 @@ import {PlayerList} from '../../models/player-list';
   templateUrl: './team-section.component.html',
   styleUrl: './team-section.component.css'
 })
-export class TeamSectionComponent {
-  @Input() players: (Player | null)[] = [];
+export class TeamSectionComponent implements OnInit {
+  rowHeight: string | number = '350px';
+
   @Input() cols: number = 3;
   @Input() listName!: PlayerList;
 
-  rowHeight: string | number = '350px';
+  players$: Observable<Player[]> = of([])
 
   hovered: { list: PlayerList; index: number } | null = null;
   dragged: { list: PlayerList; index: number } | null = null;
+
+  constructor(
+    private teamService: TeamService
+  ) { }
+
+  ngOnInit() {
+    this.players$ = this.teamService.getPlayersByListName(this.listName)
+    //console.log(this.listName, this.players$);
+  }
 
 
   cdkDragStarted(list: PlayerList, index: number) {
@@ -34,7 +46,7 @@ export class TeamSectionComponent {
   }
 
   onMouseEnter(list: PlayerList, index: number) {
-    //console.log('listname', this.listName, 'list', list, 'index', index);
+    console.log('listname', this.listName, 'list', list, 'index', index);
     if (!this.dragged) {
       this.hovered = null;
       return;
@@ -56,6 +68,11 @@ export class TeamSectionComponent {
     }
   }
 
+  onRightClick(index: number, event: MouseEvent) {
+    event.preventDefault();
+    this.teamService.resetPlayer(this.listName, index);
+  }
+
   onDrop(event: CdkDragDrop<any[]>, listName: PlayerList) {
     if (!this.dragged || !this.hovered || this.dragged.list !== this.hovered.list) {
       this.hovered = null;
@@ -66,10 +83,10 @@ export class TeamSectionComponent {
     const draggedIndex = this.dragged.index;
     const hoveredIndex = this.hovered.index;
 
+    this.teamService.swapPlayers(listName, draggedIndex, hoveredIndex);
 
-    // Swap players
-    [this.players[draggedIndex], this.players[hoveredIndex]] =
-      [this.players[hoveredIndex], this.players[draggedIndex]];
+    this.dragged = null;
+    this.hovered = null;
   }
 
 }
