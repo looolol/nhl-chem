@@ -3,6 +3,7 @@ import {Player} from '../../models/players';
 import {CommonModule} from '@angular/common';
 import {PlayerComponent} from '../player/player.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {CdkDragDrop, DragDropModule} from '@angular/cdk/drag-drop';
 
 type PlayerList = 'forwards' | 'defense' | 'goalies';
 
@@ -12,6 +13,7 @@ type PlayerList = 'forwards' | 'defense' | 'goalies';
     CommonModule,
     PlayerComponent,
     MatGridListModule,
+    DragDropModule,
   ],
   templateUrl: './team.component.html',
   styleUrl: './team.component.css'
@@ -47,51 +49,26 @@ export class TeamComponent {
     { name: 'G2', handedness: 'R', overall: 85, salary: 550, country: 'SUI', team: 'VAN', position: 'G' },
   ];
 
-  selectedPlayer: { list: PlayerList; index: number } | null = null;
+  hoveredIndex: number | null = null;
 
-  selectPlayer(list: PlayerList, index: number) {
-    if (!this.selectedPlayer) {
-      // First click → highlight this player
-      this.selectedPlayer = { list, index };
-    } else {
-      if (this.selectedPlayer.list !== list) {
-        // Clicked a player from a different list → reset selection
-        this.selectedPlayer = { list, index };
-        return;
-      }
+  onDrop(event: CdkDragDrop<number[]>, listName: PlayerList) {
+    const draggedIndex = event.item.data;
+    const targetIndex = this.hoveredIndex ?? draggedIndex;
 
-      // Second click is in the same list → swap
-      this.swapPlayers(this.selectedPlayer, { list, index });
-      this.selectedPlayer = null;
+    if (draggedIndex === targetIndex) return;
+
+    // Determine list array
+    let listArray: Player[];
+    switch (listName) {
+      case 'forwards': listArray = this.forwards; break;
+      case 'defense': listArray = this.defense; break;
+      case 'goalies': listArray = this.goalies; break;
     }
+
+    // Swap players
+    [listArray[draggedIndex], listArray[targetIndex]] =
+      [listArray[targetIndex], listArray[draggedIndex]];
+
+    this.hoveredIndex = null;
   }
-
-
-  swapPlayers(p1: { list: PlayerList; index: number }, p2: { list: PlayerList; index: number }) {
-    let list1: Player[];
-    let list2: Player[];
-
-    // Resolve first list
-    switch (p1.list) {
-      case 'forwards': list1 = this.forwards; break;
-      case 'defense': list1 = this.defense; break;
-      case 'goalies': list1 = this.goalies; break;
-    }
-
-    // Resolve second list
-    switch (p2.list) {
-      case 'forwards': list2 = this.forwards; break;
-      case 'defense': list2 = this.defense; break;
-      case 'goalies': list2 = this.goalies; break;
-    }
-
-    // Swap
-    const temp = list1[p1.index];
-    list1[p1.index] = list2[p2.index];
-    list2[p2.index] = temp;
-  }
-
-
-
-
 }

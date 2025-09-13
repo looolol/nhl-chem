@@ -19,3 +19,14 @@ mat-grid-tile.selected {
   outline: 3px solid #007bff;
   border-radius: 6px;
 }
+.cdk-drag-placeholder {
+  display: none !important;
+}
+
+.cdk-drag-animating {
+  transition: none !important;
+}
+
+.grid-tile {
+  cursor: grab;
+}

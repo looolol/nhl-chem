@@ -10,7 +10,6 @@ import {MatMenuModule} from "@angular/material/menu";
   imports: [
     RouterOutlet,
     RouterLink,
-    RouterLinkActive,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

@@ -1,39 +1,26 @@
-<div class="team-container">
-
-  <!-- Forwards Section -->
-  <div class="forwards-section section-background">
-    <mat-grid-list cols="3" rowHeight="250px" gutterSize="16px">
-      <mat-grid-tile
-        *ngFor="let player of forwards; let i = index"
-        [class.selected]="selectedPlayer?.list === 'forwards' && selectedPlayer?.index === i"
-        (click)="selectPlayer('forwards', i)"
-      >
+<!-- Forwards Section -->
+<div class="forwards-section section-background">
+  <mat-grid-list
+    cols="3"
+    rowHeight="250px"
+    gutterSize="16px"
+    cdkDropList
+    [cdkDropListSortingDisabled]="true"
+    (cdkDropListDropped)="onDrop($event, 'forwards')"
+  >
+    <mat-grid-tile
+      *ngFor="let player of forwards; let i = index"
+      cdkDrag
+      [cdkDragData]="i"
+      (mouseenter)="hoveredIndex = i"
+    >
+      <ng-template cdkDragPreview>
         <app-player [player]="player"></app-player>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
+      </ng-template>
 
-  <!-- Defense + Goalies Section -->
-  <div class="defense-section section-background">
-    <mat-grid-list cols="2" rowHeight="250px" gutterSize="16px">
-      <!-- Defense -->
-      <mat-grid-tile
-        *ngFor="let player of defense; let i = index"
-        [class.selected]="selectedPlayer?.list === 'defense' && selectedPlayer?.index === i"
-        (click)="selectPlayer('defense', i)"
-      >
-        <app-player [player]="player"></app-player>
-      </mat-grid-tile>
+      <ng-template cdkDragPlaceholder></ng-template>
 
-      <!-- Goalies -->
-      <mat-grid-tile
-        *ngFor="let player of goalies; let i = index"
-        [class.selected]="selectedPlayer?.list === 'goalies' && selectedPlayer?.index === i"
-        (click)="selectPlayer('goalies', i)"
-      >
-        <app-player [player]="player"></app-player>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-
+      <app-player [player]="player"></app-player>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
