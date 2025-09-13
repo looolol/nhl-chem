@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'shortMoney'
 })
 export class ShortMoneyPipe implements PipeTransform {
-  transform(value: number): string {
+  transform(value: number | undefined): string {
     if (value == null) return '';
 
     if (value >= 1_000_000_000) {

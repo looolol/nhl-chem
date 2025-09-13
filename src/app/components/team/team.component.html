@@ -1,10 +1,8 @@
 <div class="team-stats">
-  <div class="team-stats">
-    <p [ngClass]="getSalaryStatus()">
-      Total Salary: ${{ totalSalary | shortMoney }} / ${{ salaryCap | shortMoney }}
-    </p>
-    <p>Average Overall: {{ averageOverall | number:'1.0-0' }}</p>
-  </div>
+  <p [ngClass]="getSalaryStatus()">
+    Total Salary: ${{ totalSalary | shortMoney }} / ${{ salaryCap | shortMoney }}
+  </p>
+  <p>Average Overall: {{ averageOverall | number:'1.0-0' }}</p>
 </div>
 
 <div class="team-container">
@@ -13,7 +11,7 @@
   <div class="forwards-section section-background">
     <mat-grid-list
       cols="3"
-      rowHeight="250px"
+      rowHeight="280px"
       gutterSize="16px"
       cdkDropList
       [cdkDropListSortingDisabled]="true"
@@ -22,7 +20,7 @@
       <mat-grid-tile
         *ngFor="let player of forwards; let i = index"
         cdkDrag
-        [cdkDragData]="i"
+        [cdkDragDisabled]="!player"
         (cdkDragStarted)="cdkDragStarted('forwards', i)"
         (mouseenter)="onMouseEnter('forwards', i)"
         (mouseleave)="onMouseLeave('forwards', i)"
@@ -39,11 +37,12 @@
 
   <!-- Right: Defense + Goalies -->
   <div class="defense-goalies-section">
+
     <!-- Defense -->
     <div class="defense-section section-background">
       <mat-grid-list
         cols="2"
-        rowHeight="250px"
+        rowHeight="280px"
         gutterSize="16px"
         cdkDropList
         [cdkDropListSortingDisabled]="true"
@@ -52,7 +51,7 @@
         <mat-grid-tile
           *ngFor="let player of defense; let i = index"
           cdkDrag
-          [cdkDragData]="i"
+          [cdkDragDisabled]="!player"
           (cdkDragStarted)="cdkDragStarted('defense', i)"
           (mouseenter)="onMouseEnter('defense', i)"
           (mouseleave)="onMouseLeave('defense', i)"
@@ -71,7 +70,7 @@
     <div class="goalies-section section-background">
       <mat-grid-list
         cols="2"
-        rowHeight="250px"
+        rowHeight="280px"
         gutterSize="16px"
         cdkDropList
         [cdkDropListSortingDisabled]="true"
@@ -80,7 +79,7 @@
         <mat-grid-tile
           *ngFor="let player of goalies; let i = index"
           cdkDrag
-          [cdkDragData]="i"
+          [cdkDragDisabled]="!player"
           (cdkDragStarted)="cdkDragStarted('goalies', i)"
           (mouseenter)="onMouseEnter('goalies', i)"
           (mouseleave)="onMouseLeave('goalies', i)"
@@ -94,5 +93,6 @@
         </mat-grid-tile>
       </mat-grid-list>
     </div>
+
   </div>
 </div>

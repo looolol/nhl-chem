@@ -21,6 +21,20 @@
   padding: 16px;
 }
 
+
+mat-grid-tile {
+  padding: 0 !important;
+}
+
+.player-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
 .team-stats {
   display: flex;
   gap: 32px;

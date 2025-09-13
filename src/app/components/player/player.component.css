@@ -1,5 +1,9 @@
-.player-card {
-  width: 200px;
+.player-card {  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
   background-color: #1e1e1e; /* dark card background */
   color: #fff; /* white text */
   border-radius: 12px;
@@ -39,4 +43,37 @@
 
 .player-card p {
   margin: 4px 0;
+}
+
+mat-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player-card, .empty-slot {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* or center for empty slot */
+  box-sizing: border-box;
+  margin: 0; /* remove mat-card default margin */
+}
+
+.empty-header {
+  visibility: hidden; /* preserves header height */
+}
+
+.empty-slot {
+  height: 150px;
+  border: 2px dashed #ccc;
+  color: #999;
+  font-style: italic;
+  background-color: #f9f9f9;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

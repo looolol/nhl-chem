@@ -24,12 +24,12 @@ export class TeamComponent {
 
   salaryCap: number = 100000000;
 
-  forwards: Player[] = [
+  forwards: (Player | null)[] = [
     {name: 'LW1', handedness: 'L', overall: 85, salary: 5_000_000, country: 'CAN', team: 'TOR', position: 'FWD'},
     {name: 'C1', handedness: 'R', overall: 87, salary: 6_000_000, country: 'USA', team: 'NYR', position: 'FWD'},
     {name: 'RW1', handedness: 'R', overall: 84, salary: 5_200_000, country: 'SWE', team: 'BOS', position: 'FWD'},
     {name: 'LW2', handedness: 'L', overall: 82, salary: 4_800_000, country: 'FIN', team: 'CHI', position: 'FWD'},
-    {name: 'C2', handedness: 'R', overall: 86, salary: 5_900_000, country: 'CAN', team: 'MTL', position: 'FWD'},
+    null,
     {name: 'RW2', handedness: 'R', overall: 83, salary: 5_100_000, country: 'USA', team: 'LAK', position: 'FWD'},
     {name: 'LW3', handedness: 'L', overall: 80, salary: 4_500_000, country: 'SUI', team: 'VAN', position: 'FWD'},
     {name: 'C3', handedness: 'R', overall: 84, salary: 5_600_000, country: 'CAN', team: 'EDM', position: 'FWD'},
@@ -39,7 +39,7 @@ export class TeamComponent {
     {name: 'RW4', handedness: 'R', overall: 80, salary: 4_600_000, country: 'SWE', team: 'DAL', position: 'FWD'},
   ]
 
-  defense: Player[] = [
+  defense: (Player | null)[] = [
     {name: 'LD1', handedness: 'L', overall: 85, salary: 5_500_000, country: 'CAN', team: 'TOR', position: 'DEF'},
     {name: 'RD1', handedness: 'R', overall: 86, salary: 5_700_000, country: 'USA', team: 'NYR', position: 'DEF'},
     {name: 'LD2', handedness: 'L', overall: 83, salary: 5_200_000, country: 'SWE', team: 'BOS', position: 'DEF'},
@@ -48,7 +48,7 @@ export class TeamComponent {
     {name: 'RD3', handedness: 'R', overall: 82, salary: 5_100_000, country: 'USA', team: 'LAK', position: 'DEF'},
   ];
 
-  goalies: Player[] = [
+  goalies: (Player | null)[] = [
     {name: 'G1', handedness: 'L', overall: 88, salary: 6_000_000, country: 'CAN', team: 'EDM', position: 'G'},
     {name: 'G2', handedness: 'R', overall: 85, salary: 5_500_000, country: 'SUI', team: 'VAN', position: 'G'},
   ];
@@ -98,7 +98,7 @@ export class TeamComponent {
       return;
     }
 
-    let listArray: Player[];
+    let listArray: (Player | null)[];
     switch (listName) {
       case 'forwards':
         listArray = this.forwards;
@@ -122,6 +122,7 @@ export class TeamComponent {
 
   get totalSalary(): number {
     return [...this.forwards, ...this.defense, ...this.goalies]
+      .filter( player => player != null)
       .reduce((sum, player) => sum + player.salary, 0);
   }
 
@@ -133,7 +134,9 @@ export class TeamComponent {
 
   get averageOverall(): number {
     const all = [...this.forwards, ...this.defense, ...this.goalies];
-    return all.reduce((sum, p) => sum + p.overall, 0) / all.length;
+    return all
+      .filter(player => player != null)
+      .reduce((sum, p) => sum + p.overall, 0) / all.length;
   }
 
 }
