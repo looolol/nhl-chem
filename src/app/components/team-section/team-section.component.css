@@ -18,9 +18,6 @@ mat-grid-tile {
   border-radius: 12px;
 }
 
-.cdk-drag-placeholder {
-  display: none !important;
-}
 
 .cdk-drag-animating {
   transition: none !important;

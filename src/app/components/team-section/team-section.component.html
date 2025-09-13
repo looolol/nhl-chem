@@ -9,7 +9,7 @@
   <mat-grid-tile
     *ngFor="let player of players$ | async; let i = index trackBy: trackByIndex"
     cdkDrag
-    [cdkDragDisabled]="!player"
+    [cdkDragDisabled]="player.name === DEFAULT_PLAYER.name"
     (cdkDragStarted)="cdkDragStarted(listName, i)"
     (mouseenter)="onMouseEnter(listName, i)"
     (mouseleave)="onMouseLeave(listName, i)"

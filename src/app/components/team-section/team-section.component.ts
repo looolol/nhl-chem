@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CdkDragDrop, DragDropModule} from '@angular/cdk/drag-drop';
-import {Player} from '../../models/players';
+import {DEFAULT_PLAYER, Player} from '../../models/players';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {PlayerComponent} from '../player/player.component';
 import {CommonModule} from '@angular/common';
@@ -97,4 +97,5 @@ export class TeamSectionComponent implements OnInit {
     this.teamService.updatePlayer(this.listName, event.index, event.player);
   }
 
+  protected readonly DEFAULT_PLAYER = DEFAULT_PLAYER;
 }
