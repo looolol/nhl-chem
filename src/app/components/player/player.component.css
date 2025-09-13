@@ -1,28 +1,29 @@
-.player-card {  width: 100%;
+.player-card {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-sizing: border-box;
-  background-color: #1e1e1e; /* dark card background */
-  color: #fff; /* white text */
+
+  background-color: #1e1e1e; /* dark background */
+  color: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
   transition: transform 0.2s, box-shadow 0.2s;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
 .player-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
 }
 
 .player-card mat-card-header {
   background-color: #1565C0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #333;
   padding: 8px 12px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 
 .player-card mat-card-title {
@@ -36,44 +37,27 @@
 }
 
 .player-card mat-card-content {
+  flex: 1;
   padding: 12px;
   font-size: 0.9rem;
   line-height: 1.4;
-}
-
-.player-card p {
-  margin: 4px 0;
-}
-
-mat-card-content {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.player-card, .empty-slot {
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* or center for empty slot */
-  box-sizing: border-box;
-  margin: 0; /* remove mat-card default margin */
-}
-
-.empty-header {
-  visibility: hidden; /* preserves header height */
 }
 
 .empty-slot {
-  height: 150px;
   border: 2px dashed #ccc;
-  color: #999;
+  color: #777;
   font-style: italic;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+}
+
+.empty-slot mat-card-header {
+  visibility: hidden; /* keep header space for uniform height */
 }

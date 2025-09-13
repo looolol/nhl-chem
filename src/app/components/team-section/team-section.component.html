@@ -1,0 +1,24 @@
+<mat-grid-list
+  [cols]="cols"
+  [rowHeight]="rowHeight"
+  gutterSize="16px"
+  cdkDropList
+  [cdkDropListSortingDisabled]="true"
+  (cdkDropListDropped)="onDrop($event, listName)"
+>
+  <mat-grid-tile
+    *ngFor="let player of players; let i = index"
+    cdkDrag
+    [cdkDragDisabled]="!player"
+    (cdkDragStarted)="cdkDragStarted(listName, i)"
+    (mouseenter)="onMouseEnter(listName, i)"
+    (mouseleave)="onMouseLeave(listName, i)"
+    [class.swap-target]="hovered?.list === listName && hovered?.index === i"
+  >
+    <ng-template cdkDragPreview>
+      <app-player [player]="player"></app-player>
+    </ng-template>
+    <ng-template cdkDragPlaceholder></ng-template>
+    <app-player [player]="player"></app-player>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -6,93 +6,25 @@
 </div>
 
 <div class="team-container">
-
-  <!-- Left: Forwards -->
   <div class="forwards-section section-background">
-    <mat-grid-list
-      cols="3"
-      rowHeight="280px"
-      gutterSize="16px"
-      cdkDropList
-      [cdkDropListSortingDisabled]="true"
-      (cdkDropListDropped)="onDrop($event, 'forwards')"
-    >
-      <mat-grid-tile
-        *ngFor="let player of forwards; let i = index"
-        cdkDrag
-        [cdkDragDisabled]="!player"
-        (cdkDragStarted)="cdkDragStarted('forwards', i)"
-        (mouseenter)="onMouseEnter('forwards', i)"
-        (mouseleave)="onMouseLeave('forwards', i)"
-        [class.swap-target]="hovered?.list === 'forwards' && hovered?.index === i"
-      >
-        <ng-template cdkDragPreview>
-          <app-player [player]="player"></app-player>
-        </ng-template>
-        <ng-template cdkDragPlaceholder></ng-template>
-        <app-player [player]="player"></app-player>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <app-team-section
+      [players]="forwards"
+      [cols]="3"
+      [listName]=PlayerList.Forwards>
+    </app-team-section>
   </div>
 
-  <!-- Right: Defense + Goalies -->
-  <div class="defense-goalies-section">
+  <div class="defense-goalies-section section-background">
+    <app-team-section
+      [players]="defense"
+      [cols]="2"
+      [listName]=PlayerList.Defense>
+    </app-team-section>
 
-    <!-- Defense -->
-    <div class="defense-section section-background">
-      <mat-grid-list
-        cols="2"
-        rowHeight="280px"
-        gutterSize="16px"
-        cdkDropList
-        [cdkDropListSortingDisabled]="true"
-        (cdkDropListDropped)="onDrop($event, 'defense')"
-      >
-        <mat-grid-tile
-          *ngFor="let player of defense; let i = index"
-          cdkDrag
-          [cdkDragDisabled]="!player"
-          (cdkDragStarted)="cdkDragStarted('defense', i)"
-          (mouseenter)="onMouseEnter('defense', i)"
-          (mouseleave)="onMouseLeave('defense', i)"
-          [class.swap-target]="hovered?.list === 'defense' && hovered?.index === i"
-        >
-          <ng-template cdkDragPreview>
-            <app-player [player]="player"></app-player>
-          </ng-template>
-          <ng-template cdkDragPlaceholder></ng-template>
-          <app-player [player]="player"></app-player>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-
-    <!-- Goalies -->
-    <div class="goalies-section section-background">
-      <mat-grid-list
-        cols="2"
-        rowHeight="280px"
-        gutterSize="16px"
-        cdkDropList
-        [cdkDropListSortingDisabled]="true"
-        (cdkDropListDropped)="onDrop($event, 'goalies')"
-      >
-        <mat-grid-tile
-          *ngFor="let player of goalies; let i = index"
-          cdkDrag
-          [cdkDragDisabled]="!player"
-          (cdkDragStarted)="cdkDragStarted('goalies', i)"
-          (mouseenter)="onMouseEnter('goalies', i)"
-          (mouseleave)="onMouseLeave('goalies', i)"
-          [class.swap-target]="hovered?.list === 'goalies' && hovered?.index === i"
-        >
-          <ng-template cdkDragPreview>
-            <app-player [player]="player"></app-player>
-          </ng-template>
-          <ng-template cdkDragPlaceholder></ng-template>
-          <app-player [player]="player"></app-player>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-
+    <app-team-section
+      [players]="goalies"
+      [cols]="2"
+      [listName]="PlayerList.Goalies">
+    </app-team-section>
   </div>
 </div>

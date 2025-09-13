@@ -1,19 +1,17 @@
-<mat-card class="player-card" *ngIf="player; else emptySlot">
+<mat-card class="player-card" [class.empty-slot]="!player">
   <mat-card-header>
-    <mat-card-title>{{ player?.name }}</mat-card-title>
-    <mat-card-subtitle>{{ player?.team }} - {{ player?.country }}</mat-card-subtitle>
+    <mat-card-title>{{ player?.name || 'Empty Slot' }}</mat-card-title>
+    <mat-card-subtitle>{{ player ? (player.team + ' - ' + player.country) : '' }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <p>Handedness: {{ player?.handedness }}</p>
-    <p>Overall: {{ player?.overall }}</p>
-    <p>Salary: ${{ player?.salary | shortMoney }}</p>
+  <mat-card-content *ngIf="player; else emptyContent">
+    <p>Handedness: {{ player.handedness }}</p>
+    <p>Overall: {{ player.overall }}</p>
+    <p>Salary: ${{ player.salary | shortMoney }}</p>
   </mat-card-content>
 </mat-card>
 
-<ng-template #emptySlot>
-  <mat-card class="player-card empty-slot">
-    <mat-card-content>
-      <p>Empty Slot</p>
-    </mat-card-content>
-  </mat-card>
+<ng-template #emptyContent>
+  <mat-card-content class="empty-content">
+    <p>Empty Slot</p>
+  </mat-card-content>
 </ng-template>

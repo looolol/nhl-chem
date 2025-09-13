@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+mat-grid-list {
+  width: 100%;
+}
+
+mat-grid-tile {
+  padding: 0 !important; /* remove default spacing inside tile */
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.cdk-drag-preview {
+  z-index: 1000;
+  border-radius: 12px;
+}
+
+.cdk-drag-placeholder {
+  display: none !important;
+}
+
+.cdk-drag-animating {
+  transition: none !important;
+}
