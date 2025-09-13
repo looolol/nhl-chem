@@ -1,0 +1,44 @@
+name: Cleanup Feature Branch Folder on Delete
+
+on:
+  delete:  # triggers when any branch is deleted
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the gh-pages branch
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 0  # full history needed for git rm & push
+
+      # Configure Git user
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Remove Deleted Feature Branch Folder
+        run: |
+          BRANCH="${{ github.event.ref }}"
+          echo "Deleted branch: $BRANCH"
+
+          # Only handle feature branches
+          if [[ "$BRANCH" == feature/* ]]; then
+            if [ -d "$BRANCH" ]; then
+              echo "Removing folder: $BRANCH"
+              git rm -rf "$BRANCH"
+              git commit -m "Remove GH Pages folder for deleted branch $BRANCH"
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
+            else
+              echo "Folder $BRANCH not found, nothing to remove."
+            fi
+          else
+            echo "$BRANCH is not a feature branch, skipping."
+          fi
