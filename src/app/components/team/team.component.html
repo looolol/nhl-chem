@@ -1,4 +1,14 @@
+<div class="team-stats">
+  <div class="team-stats">
+    <p [ngClass]="getSalaryStatus()">
+      Total Salary: ${{ totalSalary | shortMoney }} / ${{ salaryCap | shortMoney }}
+    </p>
+    <p>Average Overall: {{ averageOverall | number:'1.0-0' }}</p>
+  </div>
+</div>
+
 <div class="team-container">
+
   <!-- Left: Forwards -->
   <div class="forwards-section section-background">
     <mat-grid-list

@@ -21,6 +21,28 @@
   padding: 16px;
 }
 
+.team-stats {
+  display: flex;
+  gap: 32px;
+  padding: 16px 24px;
+}
+
+.over {
+  color: #f44336; /* red */
+  font-weight: bold;
+}
+
+.near {
+  color: #ff9800; /* yellow/orange */
+  font-weight: bold;
+}
+
+.ok {
+  color: #4caf50; /* green */
+  font-weight: bold;
+}
+
+
 /* CDK drag adjustments */
 .cdk-drag-placeholder {
   display: none !important;

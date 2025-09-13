@@ -6,6 +6,6 @@
   <mat-card-content>
     <p>Handedness: {{ player.handedness }}</p>
     <p>Overall: {{ player.overall }}</p>
-    <p>Salary: ${{ player.salary }}</p>
+    <p>Salary: ${{ player.salary | shortMoney}}</p>
   </mat-card-content>
 </mat-card>
