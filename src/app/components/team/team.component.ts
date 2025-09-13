@@ -49,15 +49,22 @@ export class TeamComponent {
     { name: 'G2', handedness: 'R', overall: 85, salary: 550, country: 'SUI', team: 'VAN', position: 'G' },
   ];
 
-  hoveredIndex: number | null = null;
+  hovered: { list: PlayerList; index: number } | null = null;
+
+  onMouseEnter(list: PlayerList, index: number) {
+    this.hovered = { list, index };
+  }
 
   onDrop(event: CdkDragDrop<number[]>, listName: PlayerList) {
     const draggedIndex = event.item.data;
-    const targetIndex = this.hoveredIndex ?? draggedIndex;
+    const target = this.hovered;
 
-    if (draggedIndex === targetIndex) return;
+    // Only swap if hovered exists and belongs to same list
+    if (!target || target.list !== listName || draggedIndex === target.index) {
+      this.hovered = null;
+      return;
+    }
 
-    // Determine list array
     let listArray: Player[];
     switch (listName) {
       case 'forwards': listArray = this.forwards; break;
@@ -66,9 +73,10 @@ export class TeamComponent {
     }
 
     // Swap players
-    [listArray[draggedIndex], listArray[targetIndex]] =
-      [listArray[targetIndex], listArray[draggedIndex]];
+    [listArray[draggedIndex], listArray[target.index]] =
+      [listArray[target.index], listArray[draggedIndex]];
 
-    this.hoveredIndex = null;
+    this.hovered = null;
   }
+
 }

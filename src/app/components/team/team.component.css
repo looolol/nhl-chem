@@ -1,32 +1,32 @@
 .team-container {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 16px 24px;
   gap: 32px;
+  padding: 16px 24px;
+}
+
+/* Left column */
+.forwards-section {
+  flex: 1;
+}
+
+/* Right column: defense + goalies stacked */
+.defense-goalies-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .section-background {
-  flex: 1;
   border-radius: 12px;
-  background-color: #64B5F6;   /* light gray shading */
+  background-color: #64B5F6;
+  padding: 16px;
 }
 
-mat-grid-list {
-  width: 100%;
-}
-mat-grid-tile.selected {
-  outline: 3px solid #007bff;
-  border-radius: 6px;
-}
+/* CDK drag adjustments */
 .cdk-drag-placeholder {
   display: none !important;
 }
-
 .cdk-drag-animating {
   transition: none !important;
-}
-
-.grid-tile {
-  cursor: grab;
 }
