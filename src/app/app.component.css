@@ -1,0 +1,37 @@
+/* Top Toolbar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  background-color: #1565C0; /* deep blue */
+  color: white;
+  padding: 0 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* App Title */
+.app-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hamburger Icon */
+.white-icon {
+  color: white;
+}
+
+/* Main Content */
+.main-content {
+  padding: 24px;
+  background-color: #e3f2fd; /* light page background */
+  min-height: calc(100vh - 64px); /* subtract toolbar height */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+

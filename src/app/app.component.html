@@ -1,11 +1,13 @@
 <mat-toolbar color="primary" class="top-bar">
-    <span>NHL 26 Chem Team Builder</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon class="white-icon">menu</mat-icon>
+    </button>
+    <span class="app-title">NHL 26 Chem Team Builder</span>
 </mat-toolbar>
 
-<mat-toolbar color="accent" class="main-nav" role="navigation">
-    <a mat-flat-button="" routerLink="/team" routerLinkActive="active">Team</a>
-    <!-- add more links here if needed -->
-</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/team">Team</button>
+</mat-menu>
 
 <main class="main-content">
     <router-outlet></router-outlet>
