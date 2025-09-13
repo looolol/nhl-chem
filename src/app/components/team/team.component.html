@@ -2,8 +2,12 @@
 
   <!-- Forwards Section -->
   <div class="forwards-section section-background">
-    <mat-grid-list cols="3" rowHeight="250px" gutterSize="16px" class="forwards">
-      <mat-grid-tile *ngFor="let player of forwards">
+    <mat-grid-list cols="3" rowHeight="250px" gutterSize="16px">
+      <mat-grid-tile
+        *ngFor="let player of forwards; let i = index"
+        [class.selected]="selectedPlayer?.list === 'forwards' && selectedPlayer?.index === i"
+        (click)="selectPlayer('forwards', i)"
+      >
         <app-player [player]="player"></app-player>
       </mat-grid-tile>
     </mat-grid-list>
@@ -11,14 +15,22 @@
 
   <!-- Defense + Goalies Section -->
   <div class="defense-section section-background">
-    <mat-grid-list cols="2" rowHeight="250px" gutterSize="16px" class="defense-goalies">
+    <mat-grid-list cols="2" rowHeight="250px" gutterSize="16px">
       <!-- Defense -->
-      <mat-grid-tile *ngFor="let player of defense">
+      <mat-grid-tile
+        *ngFor="let player of defense; let i = index"
+        [class.selected]="selectedPlayer?.list === 'defense' && selectedPlayer?.index === i"
+        (click)="selectPlayer('defense', i)"
+      >
         <app-player [player]="player"></app-player>
       </mat-grid-tile>
 
       <!-- Goalies -->
-      <mat-grid-tile *ngFor="let player of goalies">
+      <mat-grid-tile
+        *ngFor="let player of goalies; let i = index"
+        [class.selected]="selectedPlayer?.list === 'goalies' && selectedPlayer?.index === i"
+        (click)="selectPlayer('goalies', i)"
+      >
         <app-player [player]="player"></app-player>
       </mat-grid-tile>
     </mat-grid-list>

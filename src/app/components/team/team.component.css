@@ -15,3 +15,7 @@
 mat-grid-list {
   width: 100%;
 }
+mat-grid-tile.selected {
+  outline: 3px solid #007bff;
+  border-radius: 6px;
+}
