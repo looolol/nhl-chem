@@ -1,0 +1,14 @@
+.team-page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-overview {
+  text-align: center;
+}
+
+.team-overview h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 600;
+}

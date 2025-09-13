@@ -1,0 +1,27 @@
+<div class="team-container">
+
+  <!-- Forwards Section -->
+  <div class="forwards-section section-background">
+    <mat-grid-list cols="3" rowHeight="250px" gutterSize="16px" class="forwards">
+      <mat-grid-tile *ngFor="let player of forwards">
+        <app-player [player]="player"></app-player>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <!-- Defense + Goalies Section -->
+  <div class="defense-section section-background">
+    <mat-grid-list cols="2" rowHeight="250px" gutterSize="16px" class="defense-goalies">
+      <!-- Defense -->
+      <mat-grid-tile *ngFor="let player of defense">
+        <app-player [player]="player"></app-player>
+      </mat-grid-tile>
+
+      <!-- Goalies -->
+      <mat-grid-tile *ngFor="let player of goalies">
+        <app-player [player]="player"></app-player>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</div>

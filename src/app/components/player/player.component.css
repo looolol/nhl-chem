@@ -1,0 +1,42 @@
+.player-card {
+  width: 200px;
+  background-color: #1e1e1e; /* dark card background */
+  color: #fff; /* white text */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Roboto', sans-serif;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.player-card mat-card-header {
+  background-color: #2c2c2c;
+  border-bottom: 1px solid #444;
+  padding: 8px 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.player-card mat-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.player-card mat-card-subtitle {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.player-card mat-card-content {
+  padding: 12px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.player-card p {
+  margin: 4px 0;
+}
