@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {DEFAULT_PLAYER, Player} from '../../models/players';
 import {MatCardModule} from '@angular/material/card';
 import {ShortMoneyPipe} from '../../common/ShortMoneyPipe';
 import {CommonModule} from '@angular/common';
 import {MatDialog} from '@angular/material/dialog';
 import {PlayerSearchDialogComponent} from '../player-search-dialog/player-search-dialog.component';
+import {TeamService} from '../../services/team.service';
 
 @Component({
   selector: 'app-player',
@@ -18,6 +19,10 @@ import {PlayerSearchDialogComponent} from '../player-search-dialog/player-search
 })
 export class PlayerComponent {
   @Input() player: Player = DEFAULT_PLAYER;
+  @Input() index!: number;
+
+  @Output() playerUpdated = new EventEmitter<{player: Player, index: number}>
+
   protected readonly DEFAULT_PLAYER = DEFAULT_PLAYER;
 
   constructor(private dialog: MatDialog) {}
@@ -31,9 +36,9 @@ export class PlayerComponent {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.player = result;
+          this.playerUpdated.emit({ player: result, index: this.index });
         }
-      })
+      });
     }
   }
 }

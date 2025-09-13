@@ -89,4 +89,12 @@ export class TeamSectionComponent implements OnInit {
     this.hovered = null;
   }
 
+  trackByIndex(index: number, item: Player) {
+    return index;
+  }
+
+  onPlayerUpdated(event: {player: Player; index: number }) {
+    this.teamService.updatePlayer(this.listName, event.index, event.player);
+  }
+
 }

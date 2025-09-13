@@ -14,8 +14,11 @@
   </div>
 
   <!-- Team Lineup -->
-  <div class="team-lineup" *ngIf="!(teamService.loading$ | async)">
+  <div class="team-lineup" *ngIf="!(teamService.loading$ | async); else loading">
     <app-team></app-team>
   </div>
+  <ng-template #loading>
+    Loading...
+  </ng-template>
 
 </div>
