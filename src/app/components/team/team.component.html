@@ -1,5 +1,5 @@
 <div class="team-container">
-  <!-- Left column: Forwards -->
+  <!-- Left: Forwards -->
   <div class="forwards-section section-background">
     <mat-grid-list
       cols="3"
@@ -13,7 +13,10 @@
         *ngFor="let player of forwards; let i = index"
         cdkDrag
         [cdkDragData]="i"
+        (cdkDragStarted)="cdkDragStarted('forwards', i)"
         (mouseenter)="onMouseEnter('forwards', i)"
+        (mouseleave)="onMouseLeave('forwards', i)"
+        [class.swap-target]="hovered?.list === 'forwards' && hovered?.index === i"
       >
         <ng-template cdkDragPreview>
           <app-player [player]="player"></app-player>
@@ -24,7 +27,7 @@
     </mat-grid-list>
   </div>
 
-  <!-- Right column: Defense + Goalies -->
+  <!-- Right: Defense + Goalies -->
   <div class="defense-goalies-section">
     <!-- Defense -->
     <div class="defense-section section-background">
@@ -40,7 +43,10 @@
           *ngFor="let player of defense; let i = index"
           cdkDrag
           [cdkDragData]="i"
+          (cdkDragStarted)="cdkDragStarted('defense', i)"
           (mouseenter)="onMouseEnter('defense', i)"
+          (mouseleave)="onMouseLeave('defense', i)"
+          [class.swap-target]="hovered?.list === 'defense' && hovered?.index === i"
         >
           <ng-template cdkDragPreview>
             <app-player [player]="player"></app-player>
@@ -54,7 +60,7 @@
     <!-- Goalies -->
     <div class="goalies-section section-background">
       <mat-grid-list
-        cols="2"
+        cols="1"
         rowHeight="250px"
         gutterSize="16px"
         cdkDropList
@@ -65,7 +71,10 @@
           *ngFor="let player of goalies; let i = index"
           cdkDrag
           [cdkDragData]="i"
+          (cdkDragStarted)="cdkDragStarted('goalies', i)"
           (mouseenter)="onMouseEnter('goalies', i)"
+          (mouseleave)="onMouseLeave('goalies', i)"
+          [class.swap-target]="hovered?.list === 'goalies' && hovered?.index === i"
         >
           <ng-template cdkDragPreview>
             <app-player [player]="player"></app-player>

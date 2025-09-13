@@ -4,12 +4,10 @@
   padding: 16px 24px;
 }
 
-/* Left column */
 .forwards-section {
   flex: 1;
 }
 
-/* Right column: defense + goalies stacked */
 .defense-goalies-section {
   flex: 1;
   display: flex;
@@ -29,4 +27,7 @@
 }
 .cdk-drag-animating {
   transition: none !important;
+}
+.cdk-drag-preview {
+  z-index: 1000;
 }
