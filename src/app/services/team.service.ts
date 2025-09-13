@@ -85,10 +85,6 @@ export class TeamService {
 
 
   // --- update a player in a list ---
-  public updatePlayers(listName: PlayerList, newPlayers: Player[]) {
-    this.getPlayersByListName(listName).next(newPlayers);
-  }
-
   public swapPlayers(listName: PlayerList, i: number, j: number) {
     const subject = this.getPlayersByListName(listName);
     const players = [...subject.value];

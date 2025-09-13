@@ -10,7 +10,6 @@ import {TeamService} from '../../services/team.service';
     CommonModule,
     ShortMoneyPipe,
     TeamComponent,
-    ShortMoneyPipe,
   ],
   templateUrl: './team-page.component.html',
   styleUrl: './team-page.component.css'

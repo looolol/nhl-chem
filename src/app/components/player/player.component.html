@@ -2,14 +2,13 @@
   class="player-card"
   [class.empty-slot]="player.name === DEFAULT_PLAYER.name"
   (click)="onCardClick()"
+  (contextmenu)="onRightClick($event)"
 >
-
   <mat-card-header *ngIf="player.name !== DEFAULT_PLAYER.name; else emptyContent">
-    <mat-card-title>{{ player.name}}</mat-card-title>
-    <mat-card-subtitle>{{ player.team + ' - ' + player.country }}</mat-card-subtitle>
+    <mat-card-title>{{ player.name }}</mat-card-title>
+    <mat-card-subtitle>{{ player.team }} - {{ player.country }}</mat-card-subtitle>
   </mat-card-header>
 
-<!--  <mat-card-content *ngIf="player.name !== DEFAULT_PLAYER.name; else emptyContent">-->
   <mat-card-content>
     <p>Handedness: {{ player.handedness }}</p>
     <p>Overall: {{ player.overall }}</p>
@@ -18,7 +17,7 @@
 </mat-card>
 
 <ng-template #emptyContent>
-  <mat-card-header >
+  <mat-card-header>
     <mat-card-title>Empty Slot</mat-card-title>
     <mat-card-subtitle>Click to Add</mat-card-subtitle>
   </mat-card-header>
